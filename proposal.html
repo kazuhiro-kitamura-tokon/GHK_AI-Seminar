@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>堀内硝子株式会社さま｜AI導入ご提案書</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #FAFAFA;
+    --bg-card: #FFFFFF;
+    --bg-accent: #F2F2F4;
+    --text-primary: #1A1A1E;
+    --text-secondary: #5C5C66;
+    --text-tertiary: #8E8E9A;
+    --border: #E2E2E6;
+    --accent: #1A1A1E;
+    --accent-soft: #EDEDF0;
+    --accent-mid: #3A3A42;
+    --success: #4A4A55;
+    --success-soft: #F0F0F3;
+    --warning: #7A7A88;
+    --warning-soft: #F5F5F7;
+    --phase1: #1A1A1E;
+    --phase2: #4A4A55;
+    --phase3: #7A7A88;
+    --font-jp: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-en: 'Inter', sans-serif;
+    --fs-base: 15px;
+    --radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.06), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,.08);
+  }
+  [data-theme="dark"] {
+    --bg: #101012; --bg-card: #1A1A1E; --bg-accent: #222226;
+    --text-primary: #E4E4E8; --text-secondary: #9A9AA4; --text-tertiary: #6A6A74;
+    --border: #2E2E34; --accent: #C8C8D0; --accent-soft: #252528; --accent-mid: #9A9AA4;
+    --success: #A0A0AA; --success-soft: #1E1E22; --warning: #B0B0BA; --warning-soft: #262628;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 4px 12px rgba(0,0,0,.4); --shadow-lg: 0 10px 30px rgba(0,0,0,.5);
+  }
+  [data-fs="large"] { --fs-base: 17px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-jp); font-size: var(--fs-base); line-height: 1.85;
+    color: var(--text-primary); background: var(--bg);
+    -webkit-font-smoothing: antialiased; transition: background .3s, color .3s;
+  }
+
+  /* Icons */
+  .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+  .icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-lg { width: 24px; height: 24px; }
+  .feature-icon-wrap {
+    flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .feature-icon-wrap .icon { width: 22px; height: 22px; }
+
+  /* Controls */
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 100; display: flex; gap: 8px; align-items: center; }
+  .ctrl-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+    box-shadow: var(--shadow-sm);
+  }
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+  .ctrl-btn .icon { width: 18px; height: 18px; }
+
+  /* Layout */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* Fade-in animation */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* Cover */
+  .cover {
+    min-height: 70vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 24px 60px; position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .cover-label {
+    font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px; padding: 6px 16px; border: 1px solid var(--accent);
+    border-radius: 100px; display: inline-block;
+  }
+  .cover h1 {
+    font-size: clamp(24px, 4.5vw, 38px); font-weight: 700; line-height: 1.4;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .cover h1 em { font-style: normal; color: var(--accent); }
+  .cover-sub { font-size: clamp(14px, 2vw, 16px); color: var(--text-secondary); margin-bottom: 40px; max-width: 540px; }
+  .cover-meta { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; font-size: 13px; color: var(--text-tertiary); }
+  .cover-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .section-label {
+    font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  section > .container > h2 { font-size: clamp(20px, 3vw, 26px); font-weight: 700; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.3px; }
+  .section-lead { color: var(--text-secondary); margin-bottom: 36px; max-width: 640px; font-size: 14px; }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; box-shadow: var(--shadow-sm); transition: box-shadow .3s, transform .3s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .card p { color: var(--text-secondary); font-size: 14px; }
+
+  /* Stats */
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .stat-card { text-align: center; padding: 24px 16px; }
+  .stat-num { font-family: var(--font-en); font-size: 38px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .stat-unit { font-family: var(--font-en); font-size: 16px; font-weight: 500; color: var(--accent); }
+  .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+
+  /* Feature grid */
+  .feature-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .feature-card { display: flex; gap: 16px; align-items: flex-start; }
+  .feature-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .feature-body p { font-size: 13.5px; color: var(--text-secondary); }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+  .tag-ready { background: var(--success-soft); color: var(--success); }
+  .tag-setup { background: var(--warning-soft); color: var(--warning); }
+  .tag-new { background: var(--accent-soft); color: var(--accent); }
+
+  /* Roadmap */
+  .roadmap { display: flex; flex-direction: column; gap: 24px; }
+  .phase { border-left: 3px solid var(--border); padding-left: 28px; position: relative; }
+  .phase::before {
+    content: ''; position: absolute; left: -8px; top: 4px;
+    width: 13px; height: 13px; border-radius: 50%; border: 3px solid var(--accent); background: var(--bg);
+  }
+  .phase[data-phase="1"]::before, .phase[data-phase="1"] { border-color: var(--phase1); }
+  .phase[data-phase="2"]::before, .phase[data-phase="2"] { border-color: var(--phase2); }
+  .phase[data-phase="3"]::before, .phase[data-phase="3"] { border-color: var(--phase3); }
+  .phase-header { font-family: var(--font-en); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .phase[data-phase="1"] .phase-header { color: var(--phase1); }
+  .phase[data-phase="2"] .phase-header { color: var(--phase2); }
+  .phase[data-phase="3"] .phase-header { color: var(--phase3); }
+  .phase h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .phase p { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+  .phase-items { list-style: none; }
+  .phase-items li { font-size: 14px; padding: 6px 0; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px; }
+  .phase-items li::before { content: '→'; color: var(--text-tertiary); flex-shrink: 0; }
+
+  /* Menu */
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .menu-card h3 { font-size: 15.5px; }
+  .menu-card .price { font-family: var(--font-en); font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .menu-card .includes { list-style: none; margin-top: 10px; }
+  .menu-card .includes li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+  .menu-card .includes li::before { content: '✓'; color: var(--success); font-weight: 700; font-size: 12px; }
+
+  /* Track record */
+  .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .track-card { padding: 20px; position: relative; overflow: hidden; }
+  .track-card .track-cat {
+    font-family: var(--font-en); font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .track-card .track-cat.cat-training { color: var(--phase1); }
+  .track-card .track-cat.cat-consulting { color: var(--phase2); }
+  .track-card .track-cat.cat-dev { color: var(--phase3); }
+  .track-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .track-card p { font-size: 12.5px; }
+  .track-badge {
+    display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 6px;
+    border-radius: 3px; margin-top: 8px;
+  }
+  .badge-active { background: var(--success-soft); color: var(--success); }
+  .badge-done { background: var(--bg-accent); color: var(--text-tertiary); }
+
+  /* Insight */
+  .insight { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; }
+  .insight p { font-size: 14px; color: var(--text-secondary); }
+  .insight strong { color: var(--text-primary); }
+
+  /* Quote */
+  .quote-block {
+    background: var(--bg-accent); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0;
+    font-size: 14.5px; font-style: italic; color: var(--text-secondary); position: relative;
+  }
+  .quote-block::before { content: '"'; font-size: 48px; line-height: 1; color: var(--accent); opacity: .3; position: absolute; top: 8px; left: 14px; font-family: Georgia, serif; }
+  .quote-block p { padding-left: 24px; }
+  .quote-block cite { display: block; font-style: normal; font-size: 12px; color: var(--text-tertiary); margin-top: 8px; padding-left: 24px; }
+
+  /* Risk */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+  .risk-card { padding: 20px; }
+  .risk-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .risk-card p { font-size: 13px; }
+
+  /* MF Cowork highlight */
+  .mf-highlight {
+    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 32px;
+    margin-top: 20px;
+  }
+  .mf-highlight h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .mf-highlight .mf-stat-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 16px 0; }
+  .mf-stat { text-align: center; }
+  .mf-stat .num { font-family: var(--font-en); font-size: 28px; font-weight: 700; color: var(--accent); }
+  .mf-stat .label { font-size: 12px; color: var(--text-secondary); }
+
+  /* Seminar detail */
+  .seminar-parts { display: flex; flex-direction: column; gap: 0; margin-top: 14px; border-top: 1px solid var(--border); }
+  .seminar-part {
+    padding: 12px 0; counter-increment: part;
+    border-bottom: 1px solid var(--border);
+    background: none; border-radius: 0; box-shadow: none; border-left: none; border-right: none;
+  }
+  .seminar-part:hover { transform: none; box-shadow: none; }
+  .seminar-part::before {
+    content: 'PART ' counter(part); font-family: var(--font-en); font-size: 10px;
+    font-weight: 700; letter-spacing: 1.5px; color: var(--accent); display: block; margin-bottom: 2px;
+  }
+  .seminar-part h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
+  .seminar-part p { font-size: 12px; }
+
+  /* Matrix */
+  .matrix-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13.5px; }
+  .matrix-table th {
+    text-align: left; font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary);
+    padding: 8px 12px; border-bottom: 2px solid var(--border);
+  }
+  .matrix-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .matrix-table tr { transition: background .2s; }
+  .matrix-table tr:hover { background: var(--bg-accent); }
+  .matrix-app {
+    font-weight: 600; font-size: 13px; white-space: nowrap; color: var(--text-primary);
+    display: flex; align-items: center; gap: 8px; min-width: 120px;
+  }
+  .matrix-app .icon { color: var(--accent); }
+  .matrix-methods { color: var(--text-secondary); line-height: 1.7; }
+  .matrix-methods span {
+    display: inline-block; background: var(--bg-accent); padding: 2px 8px;
+    border-radius: 4px; margin: 2px 3px 2px 0; font-size: 12.5px; white-space: nowrap;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+  footer { padding: 48px 0 40px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+  footer .company { font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+  .cta-section { text-align: center; padding: 64px 0; }
+  .cta-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .cta-section p { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+
+  @media (max-width: 640px) {
+    .controls { top: 8px; right: 8px; }
+    .cover { padding: 100px 20px 40px; min-height: 60vh; }
+    section { padding: 40px 0; }
+    .card { padding: 20px; }
+    .cover-meta { flex-direction: column; gap: 8px; }
+    .mf-highlight .mf-stat-row { flex-direction: column; gap: 12px; }
+  }
+  @media print {
+    .controls { display: none; } body { background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ddd; } section { page-break-inside: avoid; }
+    .fade-up { opacity: 1 !important; transform: none !important; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- SVG Icon Definitions -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="i-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><path d="M9 22v-4h6v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+  <symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+</svg>
+
+<!-- Controls -->
+<div class="controls">
+  <button class="ctrl-btn" onclick="toggleTheme()" title="テーマ切替"><span class="icon"><svg><use href="#i-moon"/></svg></span></button>
+  <button class="ctrl-btn" onclick="toggleFS()" title="文字サイズ"><span class="icon"><svg><use href="#i-type"/></svg></span></button>
+</div>
+
+<!-- COVER -->
+<header class="cover fade-up">
+  <div class="cover-label">Proposal</div>
+  <h1>AI導入ご提案<br><em>堀内硝子株式会社</em>さま</h1>
+  <p class="cover-sub">セキュリティ × 業務効率化 × 技術継承で、次の100年を支える</p>
+  <div class="cover-meta">
+    <span><span class="icon"><svg><use href="#i-calendar"/></svg></span>2026年7月</span>
+    <span><span class="icon"><svg><use href="#i-building"/></svg></span>株式会社TOKON</span>
+    <span><span class="icon"><svg><use href="#i-user"/></svg></span>堀内 健二 様</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- EXECUTIVE SUMMARY -->
+<section class="fade-up">
+  <div class="section-label">Executive Summary</div>
+  <h2>ご提案の全体像</h2>
+  <p class="section-lead">6月のAI・DXセミナー、7月13日のお打ち合わせを踏まえ、堀内硝子さまのAI導入を3つのフェーズでご提案いたします。</p>
+  <div class="summary-grid">
+    <div class="card stat-card"><div class="stat-num">5<span class="stat-unit">名</span></div><div class="stat-label">初期メンバー（社内公募）</div></div>
+    <div class="card stat-card"><div class="stat-num">¥25K<span class="stat-unit">/月</span></div><div class="stat-label">月額費用（役員2名＋社員5名）</div></div>
+    <div class="card stat-card"><div class="stat-num">3<span class="stat-unit">Phase</span></div><div class="stat-label">段階的な導入ロードマップ</div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLAN & COST -->
+<section class="fade-up">
+  <div class="section-label">Section 01</div>
+  <h2>プラン構成と費用</h2>
+  <p class="section-lead">お打ち合わせでご相談いただいた「セキュリティ」と「複数プラン運用」への回答です。</p>
+
+  <div class="insight">
+    <p><strong>1組織内でChatGPT Businessワークスペースを複数運用することは可能です。</strong>各ワークスペースは独立した存在（メンバー・請求・設定・データが別管理）のため、役員用と社員用を分離できます。</p>
+  </div>
+
+  <h3 style="margin-top:28px;font-size:17px;">推奨構成</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+    <div class="card">
+      <div class="tag tag-setup">役員向け</div>
+      <h3>ChatGPT Plus（個人プラン）</h3>
+      <p style="font-family:var(--font-en);font-size:24px;font-weight:700;color:var(--accent);margin:8px 0;">$20<span style="font-size:14px;font-weight:400;color:var(--text-secondary);">/人/月</span></p>
+      <p>経営戦略の壁打ちなど機密性の高い内容に。管理者権限のある社員からもログが見えない環境。聡史さま・健二さまにそれぞれ1アカウント。</p>
+    </div>
+    <div class="card">
+      <div class="tag tag-new">社員向け</div>
+      <h3>ChatGPT Business</h3>
+      <p style="font-family:var(--font-en);font-size:24px;font-weight:700;color:var(--accent);margin:8px 0;">$25<span style="font-size:14px;font-weight:400;color:var(--text-secondary);">/人/月</span></p>
+      <p>業務効率化用の共有ワークスペース。管理者がログを確認可能。カスタムGPTを全員で共有。5名からの運用を推奨。</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px;font-size:17px;">他サービスとの比較（参考）</h3>
+  <table class="matrix-table" style="margin-top:12px;">
+    <thead><tr><th>サービス</th><th>月額</th><th>最小席数</th><th>特徴</th><th>堀内硝子さまとの相性</th></tr></thead>
+    <tbody>
+      <tr><td class="matrix-app">ChatGPT Business</td><td>$25/人</td><td>2席</td><td>M365との相性◎、カスタムGPT共有可能</td><td style="color:var(--accent);font-weight:600;">最適</td></tr>
+      <tr><td class="matrix-app">Claude Team</td><td>$25/人</td><td>5席</td><td>長文分析・推論に強い。Corpora親和性◎</td><td>将来的に検討</td></tr>
+      <tr><td class="matrix-app">Gemini（Workspace込み）</td><td>$14/人〜</td><td>1席</td><td>Google環境前提。M365からの移行が必要</td><td>現時点では不向き</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="divider">
+
+<!-- ROADMAP -->
+<section class="fade-up">
+  <div class="section-label">Section 02</div>
+  <h2>導入ロードマップ</h2>
+  <p class="section-lead">「いきなり全社は色々起きそう」（健二さま）を踏まえた段階設計です。</p>
+  <div class="roadmap">
+    <div class="phase" data-phase="1">
+      <div class="phase-header">Phase 1 — 1〜2ヶ月目</div>
+      <h3>導入と基盤づくり</h3>
+      <p>ChatGPT Businessを5名分導入。社内公募で「AI活用を推進したい」メンバーを募り、基本研修を実施します。</p>
+      <ul class="phase-items">
+        <li>5名の初期メンバー公募・選定</li>
+        <li>ChatGPT Businessアカウント開設</li>
+        <li>AI活用実践研修（1〜2時間）</li>
+        <li>業務棚卸し（AI化可能なタスクの特定）</li>
+      </ul>
+    </div>
+    <div class="phase" data-phase="2">
+      <div class="phase-header">Phase 2 — 3〜4ヶ月目</div>
+      <h3>活用と定着</h3>
+      <p>業務効率化の実績を蓄積し、堀内硝子さま専用のカスタムGPTを構築。契約書レビュー、マニュアル集約にも着手します。</p>
+      <ul class="phase-items">
+        <li>成功事例の月次共有会</li>
+        <li>カスタムGPT構築（製品選定、品質チェック、社内FAQ）</li>
+        <li>契約書レビュー・マニュアル集約への適用</li>
+        <li>全社展開の判断材料の蓄積</li>
+      </ul>
+    </div>
+    <div class="phase" data-phase="3">
+      <div class="phase-header">Phase 3 — 5ヶ月目〜</div>
+      <h3>拡張と高度化</h3>
+      <p>Phase 1-2の成果を踏まえ全社展開を判断。ベテラン技術者の暗黙知をAIに移植する「Corpora」の構築も視野に。</p>
+      <ul class="phase-items">
+        <li>全社展開の判断と実行</li>
+        <li>Corpora（技術継承AI）の構築</li>
+        <li>AIエージェント活用の検討</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- INITIAL MEMBERS -->
+<section class="fade-up">
+  <div class="section-label">Section 03</div>
+  <h2>初期メンバー公募の設計</h2>
+  <p class="section-lead">Phase 1 の核となる施策。自発的に手を挙げた人の方が定着率が高い傾向があります。</p>
+  <div class="feature-grid">
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-mail"/></svg></span></div><div class="feature-body"><h4>公募の案内</h4><p>全社員に向けて「AI活用推進メンバー募集（5名）」の案内を発信します。案内文はTOKONでご用意します。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-user"/></svg></span></div><div class="feature-body"><h4>選定の基準</h4><p>年齢や部署は問いません。「新しいことに興味がある」「業務改善の意欲がある」が最重要。健二さまのご指摘通り、若手の方が馴染みやすい傾向あり。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-target"/></svg></span></div><div class="feature-body"><h4>期待値の明示</h4><p>「会社がアカウントを用意するので、業務効率化に徹底的に手伝ってもらいます」という明確なメッセージで始めます。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-zap"/></svg></span></div><div class="feature-body"><h4>初回研修の実施</h4><p>セミナーでご体験いただいた内容をベースに、「自分の業務で使う」に特化した実践型研修。1〜2時間で全員がその場でAIを触る構成。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-bar-chart"/></svg></span></div><div class="feature-body"><h4>月次レビュー</h4><p>毎月1回、5名で「こう使って、こう楽になった」を共有する場を設定。成功事例の蓄積が次の展開の燃料になります。</p></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TASK AUDIT -->
+<section class="fade-up">
+  <div class="section-label">Section 04</div>
+  <h2>業務棚卸しの方法論</h2>
+  <p class="section-lead">お打ち合わせでご提案した「AIに自分の業務を深掘りインタビューさせる」手法です。</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card"><div class="tag tag-new">Step 1</div><h3>AIに業務をインタビューさせる</h3><p>「私の業務を効率化したい。まず仕事内容を深掘りインタビューして」とAIに依頼。AIが質問を投げかけ、業務の全体像を引き出します。</p></div>
+    <div class="card"><div class="tag tag-new">Step 2</div><h3>タスクの分解</h3><p>引き出された業務を「定型作業」「判断が必要」「人間関係が必要」に分類。AIが代行できるのは主に定型作業の部分。</p></div>
+    <div class="card"><div class="tag tag-new">Step 3</div><h3>即効性の高いタスクを特定</h3><p>「毎日やっている」「時間がかかる」「定型的」の3条件が揃うタスクが最有力候補。メール作成、資料下書き、データ整理など。</p></div>
+    <div class="card"><div class="tag tag-new">Step 4</div><h3>AIで実際にやってみる</h3><p>特定したタスクをAIに渡してみる。「この仕事、AIに任せたら何分でできるか？」を体感。成功体験が次のモチベーションに。</p></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- USE CASES -->
+<section class="fade-up">
+  <div class="section-label">Section 05</div>
+  <h2>即効性のあるユースケース集</h2>
+  <p class="section-lead">堀内硝子さまの業務に直結する活用例です。</p>
+  <div class="feature-grid">
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-mail"/></svg></span></div><div class="feature-body"><h4>メール作成・推敲</h4><p>顧客への技術回答、見積送付メール、社内連絡の下書き。毎日の積み重ねで年間数百時間の削減。</p><div class="tag tag-ready">すぐに使える</div></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-bar-chart"/></svg></span></div><div class="feature-body"><h4>Excel分析・レポート作成</h4><p>売上・在庫・品質データをAIに渡して傾向分析・グラフ化。「前年比が大きく下がっている顧客を教えて」が一瞬で。</p><div class="tag tag-ready">すぐに使える</div></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-file-text"/></svg></span></div><div class="feature-body"><h4>契約書レビュー</h4><p>取引先との契約書をAIに読ませて「当社に不利な条項はどこか」を確認。法務の第一チェックに。</p><div class="tag tag-setup">奥田さまご要望</div></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-search"/></svg></span></div><div class="feature-body"><h4>マニュアル整理・集約</h4><p>各部門に散らばるマニュアルをAIに読ませて統一フォーマットに再構成。「このPDFとこのWordを統合して」で一元化。</p><div class="tag tag-setup">奥田さまご要望</div></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-mic"/></svg></span></div><div class="feature-body"><h4>会議議事録の自動生成</h4><p>文字起こしをAIに渡して構造化された議事録＋アクションリストを自動生成。</p><div class="tag tag-ready">すぐに使える</div></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-message"/></svg></span></div><div class="feature-body"><h4>海外顧客向け技術文書の翻訳</h4><p>品質保証書、製品仕様書の英語・中国語・韓国語への翻訳。SEMI規格対応のフォーマット改訂にも。</p><div class="tag tag-ready">すぐに使える</div></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CUSTOM GPTs -->
+<section class="fade-up">
+  <div class="section-label">Section 06</div>
+  <h2>カスタムGPTの構築提案</h2>
+  <p class="section-lead">Businessプランの最大の強み——堀内硝子さま専用のAIを作成し、ワークスペース内の全員で共有できます。</p>
+  <div class="menu-grid">
+    <div class="card menu-card">
+      <div class="tag tag-new">営業部門向け</div>
+      <h3>製品選定ナビゲーションGPT</h3>
+      <p>「この薬品を入れたい、容量500ml、耐薬品性が必要」と入力すると、最適な容器・キャップの組み合わせを提案。</p>
+      <ul class="includes"><li>製品マスタの学習</li><li>選定ロジックの組み込み</li><li>過去の選定事例の蓄積</li></ul>
+    </div>
+    <div class="card menu-card">
+      <div class="tag tag-new">品質保証部門向け</div>
+      <h3>品質基準チェックGPT</h3>
+      <p>検査データを入力すると規格との適合判定と過去の類似事例を提示。「この清浄度は規格内か」に即答。</p>
+      <ul class="includes"><li>検査規格の学習</li><li>過去クレーム事例の参照</li><li>不適合時の対応フロー提示</li></ul>
+    </div>
+    <div class="card menu-card">
+      <div class="tag tag-new">教育・総務向け</div>
+      <h3>新入社員FAQ GPT</h3>
+      <p>社内規程、製品知識、製造工程の基礎を学習させた社内FAQ。24時間対応。</p>
+      <ul class="includes"><li>社内規程の学習</li><li>製品カタログの搭載</li><li>よくある質問の自動回答</li></ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECURITY -->
+<section class="fade-up">
+  <div class="section-label">Section 07</div>
+  <h2>セキュリティガイドライン案</h2>
+  <p class="section-lead">導入時に全社員へ配布する想定のルールです。</p>
+  <div class="risk-grid">
+    <div class="card risk-card"><h4><span class="icon" style="color:var(--accent);"><svg><use href="#i-zap"/></svg></span>個人情報の入力禁止</h4><p>顧客名・従業員の個人データ・個人を特定できる情報をAIに入力しないこと。</p></div>
+    <div class="card risk-card"><h4><span class="icon" style="color:var(--accent);"><svg><use href="#i-zap"/></svg></span>機密書類の直接入力禁止</h4><p>経営戦略・未公開の財務情報・人事評価など、社外に出してはならない情報。</p></div>
+    <div class="card risk-card"><h4><span class="icon" style="color:var(--accent);"><svg><use href="#i-zap"/></svg></span>検証なしの外部送付禁止</h4><p>AIの回答をそのまま外部に送付しないこと。必ず人間が内容を確認。</p></div>
+    <div class="card risk-card"><h4><span class="icon" style="color:var(--accent);"><svg><use href="#i-zap"/></svg></span>専門判断の代替禁止</h4><p>法律・医療・財務の判断をAIの回答だけで行わないこと。</p></div>
+  </div>
+  <div class="insight" style="margin-top:20px;">
+    <p>ChatGPT Businessプランでは、ワークスペースのデータは学習に使われません。ただし、個人の無料アカウントで会社情報を入力する<strong>「シャドウAI」を防止するため、全員にBusinessアカウントを配布し正しい使い方を周知することが重要</strong>です。</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CORPORA -->
+<section class="fade-up">
+  <div class="section-label">Section 08</div>
+  <h2>技術継承への道筋 — Corpora</h2>
+  <p class="section-lead">Phase 3 の将来像として。ベテラン技術者の暗黙知をAIに移植し、いつでも引き出せる状態にします。</p>
+  <div class="mf-highlight">
+    <h3>なぜ今、技術継承にAIなのか</h3>
+    <p style="color:var(--text-secondary);font-size:14px;margin-top:8px;">堀内硝子さまは2025年に技術開発部を新設し、「暗黙知の集合体」からの脱却を掲げていらっしゃいます。ベテランの退職とともに失われる判断基準を、AIで構造化・保存します。</p>
+    <div class="mf-stat-row">
+      <div class="mf-stat"><div class="num">60-90</div><div class="label">分のインタビュー</div></div>
+      <div class="mf-stat"><div class="num">2-3</div><div class="label">名のキーパーソン</div></div>
+      <div class="mf-stat"><div class="num">∞</div><div class="label">回、知恵を引き出せる</div></div>
+    </div>
+  </div>
+  <div class="quote-block" style="margin-top:20px;">
+    <p>「この内容物にはガラスを選ぶかプラを選ぶか」「気密性と清浄度のどちらを優先するか」「過去にこういう失敗があったから今はこうしている」——こういった判断基準が、AIから引き出せるようになります。</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- TOKON SUPPORT -->
+<section class="fade-up">
+  <div class="section-label">Section 09</div>
+  <h2>TOKONの支援メニュー</h2>
+  <p class="section-lead">導入から定着まで一気通貫でサポートいたします。</p>
+  <div class="menu-grid">
+    <div class="card menu-card"><h3>AI活用実践研修</h3><p>初期メンバー5名向け。「自分の業務で使う」に特化した実践型。</p><ul class="includes"><li>プロンプト設計の基礎</li><li>業務適用ワークショップ</li><li>フォローアップ相談</li></ul></div>
+    <div class="card menu-card"><h3>業務棚卸しワークショップ</h3><p>各メンバーの業務を分解し、AI化可能なタスクを特定。</p><ul class="includes"><li>AIインタビュー手法の導入</li><li>優先順位付け</li><li>実行計画の策定</li></ul></div>
+    <div class="card menu-card"><h3>カスタムGPT構築支援</h3><p>堀内硝子さま専用のカスタムGPTの設計・構築・テスト。</p><ul class="includes"><li>要件定義</li><li>プロトタイプ構築</li><li>運用サポート</li></ul></div>
+    <div class="card menu-card"><h3>Corpora構築</h3><p>ベテラン技術者の知識をAIに移植。技術開発部の取り組みと連動。</p><ul class="includes"><li>インタビュー設計・実施</li><li>知識の構造化</li><li>社内参照基盤の構築</li></ul></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- NEXT STEPS -->
+<section class="cta-section fade-up">
+  <h2>次のステップ</h2>
+  <p>以下の4ステップで、スムーズに導入を進めます。</p>
+  <div style="max-width:640px;margin:0 auto;text-align:left;">
+    <div class="feature-grid">
+      <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-message"/></svg></span></div><div class="feature-body"><h4>1. 社長とのご相談</h4><p>本提案の内容を踏まえ、AI導入の方向性と予算感について社長とご相談ください。</p></div></div>
+      <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-edit"/></svg></span></div><div class="feature-body"><h4>2. プランの確定</h4><p>ChatGPT Business 5名＋役員個人プランの構成でよいか、ご判断をお聞かせください。</p></div></div>
+      <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-user"/></svg></span></div><div class="feature-body"><h4>3. 初期メンバーの選定・公募</h4><p>5名の初期メンバーを確定。公募のご案内文はTOKONでご用意します。</p></div></div>
+      <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-zap"/></svg></span></div><div class="feature-body"><h4>4. アカウント開設・初回研修</h4><p>ChatGPT Businessのアカウント開設をサポートし、初回研修を実施します。</p></div></div>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="company">株式会社TOKON 事業開発室 AI/デジタルソリューションG</div>
+  <p>喜多村 一寛（きたむら かずひろ）<br>kitamura@tokon.co.jp</p>
+  <p style="margin-top:16px;font-size:11px;opacity:.5;">Copyright © TOKON All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// Theme toggle
+function toggleTheme() {
+  const h = document.documentElement, d = h.getAttribute('data-theme') === 'dark';
+  h.setAttribute('data-theme', d ? '' : 'dark');
+  document.querySelector('#themeBtn .icon svg use').setAttribute('href', d ? '#i-moon' : '#i-sun');
+  localStorage.setItem('theme', d ? 'light' : 'dark');
+}
+// Font size toggle
+function toggleFontSize() {
+  const h = document.documentElement, l = h.getAttribute('data-fs') === 'large';
+  h.setAttribute('data-fs', l ? '' : 'large');
+  localStorage.setItem('fs', l ? '' : 'large');
+}
+// Restore preferences
+(function() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.querySelector('#themeBtn .icon svg use').setAttribute('href', '#i-sun');
+  }
+  if (localStorage.getItem('fs') === 'large') document.documentElement.setAttribute('data-fs', 'large');
+})();
+
+// Intersection Observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Count-up animation
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target, target = parseInt(el.dataset.count);
+    if (!target) return;
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 30));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(interval); }
+      el.textContent = current;
+    }, 30);
+    countObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+</script>
+</body>
+</html>
