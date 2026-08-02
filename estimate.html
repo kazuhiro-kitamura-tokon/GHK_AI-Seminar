@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>堀内硝子株式会社さま｜AI導入・ガバナンス構築ご提案</title>
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap');
+
+  :root {
+    --bg: #FAFAFA;
+    --bg-card: #FFFFFF;
+    --bg-accent: #F2F2F4;
+    --text-primary: #1A1A1E;
+    --text-secondary: #5C5C66;
+    --text-tertiary: #8E8E9A;
+    --border: #E2E2E6;
+    --accent: #1A1A1E;
+    --accent-soft: #EDEDF0;
+    --accent-mid: #3A3A42;
+    --success: #4A4A55;
+    --success-soft: #F0F0F3;
+    --warning: #7A7A88;
+    --warning-soft: #F5F5F7;
+    --phase1: #1A1A1E;
+    --phase2: #4A4A55;
+    --phase3: #7A7A88;
+    --font-jp: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    --font-en: 'Inter', sans-serif;
+    --fs-base: 15px;
+    --radius: 12px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.06);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.06), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,.08);
+  }
+  [data-theme="dark"] {
+    --bg: #101012; --bg-card: #1A1A1E; --bg-accent: #222226;
+    --text-primary: #E4E4E8; --text-secondary: #9A9AA4; --text-tertiary: #6A6A74;
+    --border: #2E2E34; --accent: #C8C8D0; --accent-soft: #252528; --accent-mid: #9A9AA4;
+    --success: #A0A0AA; --success-soft: #1E1E22; --warning: #B0B0BA; --warning-soft: #262628;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,.3); --shadow-md: 0 4px 12px rgba(0,0,0,.4); --shadow-lg: 0 10px 30px rgba(0,0,0,.5);
+  }
+  [data-fs="large"] { --fs-base: 17px; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-jp); font-size: var(--fs-base); line-height: 1.85;
+    color: var(--text-primary); background: var(--bg);
+    -webkit-font-smoothing: antialiased; transition: background .3s, color .3s;
+  }
+
+  /* Icons */
+  .icon { width: 20px; height: 20px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
+  .icon svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-lg { width: 24px; height: 24px; }
+  .feature-icon-wrap {
+    flex-shrink: 0; width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .feature-icon-wrap .icon { width: 22px; height: 22px; }
+
+  /* Controls */
+  .controls { position: fixed; top: 16px; right: 16px; z-index: 100; display: flex; gap: 8px; align-items: center; }
+  .ctrl-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-secondary); cursor: pointer;
+    display: flex; align-items: center; justify-content: center; transition: all .2s;
+    box-shadow: var(--shadow-sm);
+  }
+  .ctrl-btn:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+  .ctrl-btn .icon { width: 18px; height: 18px; }
+
+  /* Layout */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* Fade-in animation */
+  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* Cover */
+  .cover {
+    min-height: 70vh; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 80px 24px 60px; position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ''; position: absolute; top: -30%; right: -20%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
+    border-radius: 50%; pointer-events: none;
+  }
+  .cover-label {
+    font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px; padding: 6px 16px; border: 1px solid var(--accent);
+    border-radius: 100px; display: inline-block;
+  }
+  .cover h1 {
+    font-size: clamp(24px, 4.5vw, 38px); font-weight: 700; line-height: 1.4;
+    letter-spacing: -0.5px; margin-bottom: 16px;
+  }
+  .cover h1 em { font-style: normal; color: var(--accent); }
+  .cover-sub { font-size: clamp(14px, 2vw, 16px); color: var(--text-secondary); margin-bottom: 40px; max-width: 540px; }
+  .cover-meta { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; font-size: 13px; color: var(--text-tertiary); }
+  .cover-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* Sections */
+  section { padding: 56px 0; }
+  .section-label {
+    font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  section > .container > h2 { font-size: clamp(20px, 3vw, 26px); font-weight: 700; line-height: 1.4; margin-bottom: 12px; letter-spacing: -0.3px; }
+  .section-lead { color: var(--text-secondary); margin-bottom: 36px; max-width: 640px; font-size: 14px; }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; box-shadow: var(--shadow-sm); transition: box-shadow .3s, transform .3s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+  .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .card p { color: var(--text-secondary); font-size: 14px; }
+
+  /* Stats */
+  .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .stat-card { text-align: center; padding: 24px 16px; }
+  .stat-num { font-family: var(--font-en); font-size: 38px; font-weight: 700; color: var(--accent); line-height: 1; }
+  .stat-unit { font-family: var(--font-en); font-size: 16px; font-weight: 500; color: var(--accent); }
+  .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+
+  /* Feature grid */
+  .feature-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  .feature-card { display: flex; gap: 16px; align-items: flex-start; }
+  .feature-body h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .feature-body p { font-size: 13.5px; color: var(--text-secondary); }
+  .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 6px; }
+  .tag-ready { background: var(--success-soft); color: var(--success); }
+  .tag-setup { background: var(--warning-soft); color: var(--warning); }
+  .tag-new { background: var(--accent-soft); color: var(--accent); }
+
+  /* Roadmap */
+  .roadmap { display: flex; flex-direction: column; gap: 24px; }
+  .phase { border-left: 3px solid var(--border); padding-left: 28px; position: relative; }
+  .phase::before {
+    content: ''; position: absolute; left: -8px; top: 4px;
+    width: 13px; height: 13px; border-radius: 50%; border: 3px solid var(--accent); background: var(--bg);
+  }
+  .phase[data-phase="1"]::before, .phase[data-phase="1"] { border-color: var(--phase1); }
+  .phase[data-phase="2"]::before, .phase[data-phase="2"] { border-color: var(--phase2); }
+  .phase[data-phase="3"]::before, .phase[data-phase="3"] { border-color: var(--phase3); }
+  .phase-header { font-family: var(--font-en); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+  .phase[data-phase="1"] .phase-header { color: var(--phase1); }
+  .phase[data-phase="2"] .phase-header { color: var(--phase2); }
+  .phase[data-phase="3"] .phase-header { color: var(--phase3); }
+  .phase h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+  .phase p { color: var(--text-secondary); font-size: 14px; margin-bottom: 12px; }
+  .phase-items { list-style: none; }
+  .phase-items li { font-size: 14px; padding: 6px 0; color: var(--text-secondary); display: flex; align-items: flex-start; gap: 8px; }
+  .phase-items li::before { content: '→'; color: var(--text-tertiary); flex-shrink: 0; }
+
+  /* Menu */
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .menu-card h3 { font-size: 15.5px; }
+  .menu-card .price { font-family: var(--font-en); font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .menu-card .includes { list-style: none; margin-top: 10px; }
+  .menu-card .includes li { font-size: 13px; color: var(--text-secondary); padding: 3px 0; display: flex; align-items: center; gap: 6px; }
+  .menu-card .includes li::before { content: '✓'; color: var(--success); font-weight: 700; font-size: 12px; }
+
+  /* Track record */
+  .track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .track-card { padding: 20px; position: relative; overflow: hidden; }
+  .track-card .track-cat {
+    font-family: var(--font-en); font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .track-card .track-cat.cat-training { color: var(--phase1); }
+  .track-card .track-cat.cat-consulting { color: var(--phase2); }
+  .track-card .track-cat.cat-dev { color: var(--phase3); }
+  .track-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .track-card p { font-size: 12.5px; }
+  .track-badge {
+    display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 6px;
+    border-radius: 3px; margin-top: 8px;
+  }
+  .badge-active { background: var(--success-soft); color: var(--success); }
+  .badge-done { background: var(--bg-accent); color: var(--text-tertiary); }
+
+  /* Insight */
+  .insight { background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 20px 24px; border-radius: 0 var(--radius) var(--radius) 0; margin: 24px 0; }
+  .insight p { font-size: 14px; color: var(--text-secondary); }
+  .insight strong { color: var(--text-primary); }
+
+  /* Quote */
+  .quote-block {
+    background: var(--bg-accent); border-radius: var(--radius); padding: 24px 28px; margin: 20px 0;
+    font-size: 14.5px; font-style: italic; color: var(--text-secondary); position: relative;
+  }
+  .quote-block::before { content: '"'; font-size: 48px; line-height: 1; color: var(--accent); opacity: .3; position: absolute; top: 8px; left: 14px; font-family: Georgia, serif; }
+  .quote-block p { padding-left: 24px; }
+  .quote-block cite { display: block; font-style: normal; font-size: 12px; color: var(--text-tertiary); margin-top: 8px; padding-left: 24px; }
+
+  /* Risk */
+  .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 20px; }
+  .risk-card { padding: 20px; }
+  .risk-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .risk-card p { font-size: 13px; }
+
+  /* MF Cowork highlight */
+  .mf-highlight {
+    background: linear-gradient(135deg, var(--accent-soft) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--border); border-radius: var(--radius); padding: 32px;
+    margin-top: 20px;
+  }
+  .mf-highlight h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .mf-highlight .mf-stat-row { display: flex; gap: 24px; flex-wrap: wrap; margin: 16px 0; }
+  .mf-stat { text-align: center; }
+  .mf-stat .num { font-family: var(--font-en); font-size: 28px; font-weight: 700; color: var(--accent); }
+  .mf-stat .label { font-size: 12px; color: var(--text-secondary); }
+
+  /* Seminar detail */
+  .seminar-parts { display: flex; flex-direction: column; gap: 0; margin-top: 14px; border-top: 1px solid var(--border); }
+  .seminar-part {
+    padding: 12px 0; counter-increment: part;
+    border-bottom: 1px solid var(--border);
+    background: none; border-radius: 0; box-shadow: none; border-left: none; border-right: none;
+  }
+  .seminar-part:hover { transform: none; box-shadow: none; }
+  .seminar-part::before {
+    content: 'PART ' counter(part); font-family: var(--font-en); font-size: 10px;
+    font-weight: 700; letter-spacing: 1.5px; color: var(--accent); display: block; margin-bottom: 2px;
+  }
+  .seminar-part h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
+  .seminar-part p { font-size: 12px; }
+
+  /* Matrix */
+  .matrix-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13.5px; }
+  .matrix-table th {
+    text-align: left; font-family: var(--font-en); font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; color: var(--text-tertiary);
+    padding: 8px 12px; border-bottom: 2px solid var(--border);
+  }
+  .matrix-table td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .matrix-table tr { transition: background .2s; }
+  .matrix-table tr:hover { background: var(--bg-accent); }
+  .matrix-app {
+    font-weight: 600; font-size: 13px; white-space: nowrap; color: var(--text-primary);
+    display: flex; align-items: center; gap: 8px; min-width: 120px;
+  }
+  .matrix-app .icon { color: var(--accent); }
+  .matrix-methods { color: var(--text-secondary); line-height: 1.7; }
+  .matrix-methods span {
+    display: inline-block; background: var(--bg-accent); padding: 2px 8px;
+    border-radius: 4px; margin: 2px 3px 2px 0; font-size: 12.5px; white-space: nowrap;
+  }
+
+  hr.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+  footer { padding: 48px 0 40px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+  footer .company { font-weight: 600; color: var(--text-secondary); margin-bottom: 4px; }
+  .cta-section { text-align: center; padding: 64px 0; }
+  .cta-section h2 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .cta-section p { color: var(--text-secondary); font-size: 14px; margin-bottom: 24px; }
+
+  @media (max-width: 640px) {
+    .controls { top: 8px; right: 8px; }
+    .cover { padding: 100px 20px 40px; min-height: 60vh; }
+    section { padding: 40px 0; }
+    .card { padding: 20px; }
+    .cover-meta { flex-direction: column; gap: 8px; }
+    .mf-highlight .mf-stat-row { flex-direction: column; gap: 12px; }
+  }
+  @media print {
+    .controls { display: none; } body { background: #fff; }
+    .card { box-shadow: none; border: 1px solid #ddd; } section { page-break-inside: avoid; }
+    .fade-up { opacity: 1 !important; transform: none !important; }
+  }
+
+.price-table{width:100%;border-collapse:collapse;margin-top:20px;}
+.price-table th,.price-table td{padding:14px 16px;text-align:left;border-bottom:2px solid var(--border);font-size:15px;}
+.price-table th{font-weight:600;color:var(--text-secondary);font-size:13px;letter-spacing:1px;text-transform:uppercase;}
+.price-table .item-main{font-weight:600;color:var(--text-primary);}
+.price-table .item-sub{padding-left:32px;color:var(--text-secondary);font-size:14px;}
+.price-table .price{text-align:right;font-family:var(--font-en);font-weight:600;}
+.price-table .total{font-size:18px;font-weight:700;color:var(--accent);border-top:2px solid var(--accent);}
+.price-table .included{color:var(--text-secondary);font-size:13px;font-style:italic;}
+.price-table .strike{text-decoration:line-through;color:var(--text-secondary);opacity:.6;font-size:13px;margin-right:8px;}
+</style>
+</head>
+<body>
+
+<!-- SVG Icon Definitions -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+  <symbol id="i-type" viewBox="0 0 24 24"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="9" y1="6" x2="9" y2="6.01"/><line x1="15" y1="6" x2="15" y2="6.01"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/><path d="M9 22v-4h6v4"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></symbol>
+  <symbol id="i-bar-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></symbol>
+  <symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><line x1="12" y1="7" x2="12" y2="11"/><line x1="8" y1="16" x2="8" y2="16.01"/><line x1="16" y1="16" x2="16" y2="16.01"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></symbol>
+  <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+  <symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></symbol>
+</svg>
+
+<div class="controls">
+  <button class="ctrl-btn" onclick="toggleTheme()" title="テーマ切替"><span class="icon"><svg><use href="#i-moon"/></svg></span></button>
+  <button class="ctrl-btn" onclick="toggleFS()" title="文字サイズ"><span class="icon"><svg><use href="#i-type"/></svg></span></button>
+</div>
+
+<header class="cover fade-up">
+  <div class="cover-label">Proposal</div>
+  <h1>AI導入・ガバナンス構築<br>ご提案<br><em>堀内硝子株式会社</em>さま</h1>
+  <p class="cover-sub">セキュリティとルール整備を起点に、安全かつ実践的なAI活用を実現する</p>
+  <div class="cover-meta">
+    <span><span class="icon"><svg><use href="#i-calendar"/></svg></span>2026年7月</span>
+    <span><span class="icon"><svg><use href="#i-building"/></svg></span>株式会社TOKON</span>
+    <span><span class="icon"><svg><use href="#i-user"/></svg></span>堀内 健二 様</span>
+  </div>
+</header>
+
+<div class="container">
+
+
+
+<!-- BACKGROUND -->
+<section class="fade-up">
+  <div class="section-label">Background</div>
+  <h2>お打ち合わせで共有いただいた課題</h2>
+  <p class="section-lead">堀内硝子さまのAI導入にあたり、以下の課題が明確になりました。</p>
+  <div class="feature-grid">
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-shield"/></svg></span></div><div class="feature-body"><h4>セキュリティへの高い感度</h4><p>経営情報の壁打ちに使いたいが、メモリ機能による情報共有リスクや、社員の不適切な利用への懸念がある。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-target"/></svg></span></div><div class="feature-body"><h4>ルールなき導入への不安</h4><p>「こいつら何してんだ」という管理面の不安。歯止めの仕組みがないまま始めることへの危機感。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-user"/></svg></span></div><div class="feature-body"><h4>現場の温度差</h4><p>営業会議で手を挙げた人がゼロ。AIの可能性を理解してもらう研修が先に必要。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-file-text"/></svg></span></div><div class="feature-body"><h4>データ管理の課題</h4><p>ファイルフォースのデータがジャングル状態。将来のAI分析基盤に向けた整理が必要。</p></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PLAN STRUCTURE -->
+<section class="fade-up">
+  <div class="section-label">Section 01</div>
+  <h2>ChatGPT プラン構成</h2>
+  <p class="section-lead">お打ち合わせで整理した推奨構成です。</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="card">
+      <div class="tag tag-new">社員＋役員共用</div>
+      <h3>ChatGPT Business</h3>
+      <p style="font-family:var(--font-en);font-size:24px;font-weight:700;color:var(--accent);margin:8px 0;">$25<span style="font-size:14px;font-weight:400;color:var(--text-secondary);">/人/月</span></p>
+      <p>社員5名＋役員の席を含む共有ワークスペース。カスタムGPTを全員で共有可能。データは学習に使われない。</p>
+      <ul class="phase-items" style="margin-top:12px;">
+        <li>カスタムGPTの全員共有</li>
+        <li>管理者による利用状況の確認</li>
+        <li>チャット内容は管理者でも閲覧不可</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="tag tag-setup">役員個人用</div>
+      <h3>ChatGPT Plus（個人プラン）</h3>
+      <p style="font-family:var(--font-en);font-size:24px;font-weight:700;color:var(--accent);margin:8px 0;">$20<span style="font-size:14px;font-weight:400;color:var(--text-secondary);">/人/月</span></p>
+      <p>経営戦略の壁打ち・機密性の高い相談に。パーソナライズ機能が優れており、過去の相談内容を踏まえた回答が可能。</p>
+      <ul class="phase-items" style="margin-top:12px;">
+        <li>高度なパーソナライズ（Dreaming）</li>
+        <li>管理者権限のある社員からも完全に見えない</li>
+        <li>多要素認証による高いアカウントセキュリティ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="insight" style="margin-top:20px;">
+    <p>通常業務はBusinessワークスペースで。機密の壁打ちは個人Plusに切り替えて使う<strong>二刀流</strong>の運用です。カスタムGPTは「リンク共有」機能により、Business⇔個人Plus間でも共有可能です。</p>
+  </div>
+  <h3 style="margin-top:28px;font-size:17px;">推奨する契約構成</h3>
+  <table class="price-table" style="margin-top:12px;">
+    <thead><tr><th>契約</th><th>席数</th><th>単価</th><th class="price">月額</th></tr></thead>
+    <tbody>
+      <tr><td class="item-main">ChatGPT Business</td><td>8名（社員5名＋役員3名）</td><td>$25/人</td><td class="price">$200</td></tr>
+      <tr><td class="item-main">ChatGPT Plus（個人）</td><td>3名（役員各自）</td><td>$20/人</td><td class="price">$60</td></tr>
+      <tr><td class="item-main total">ChatGPT月額合計</td><td></td><td></td><td class="price total">$260/月（約¥40,000）</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:8px;font-size:13px;color:var(--text-secondary);">※ 為替レートにより変動します。上記はOpenAI社への直接支払いとなります。</p>
+</section>
+
+<hr class="divider">
+
+<!-- GOVERNANCE -->
+<section class="fade-up">
+  <div class="section-label">Section 02</div>
+  <h2>AIガバナンス策定パッケージ</h2>
+  <p class="section-lead">「ルールを作ってから始める」——堀内硝子さまの慎重な姿勢に合わせた3ヶ月プログラムです。</p>
+  <h3 style="margin-top:24px;font-size:17px;">成果物・納品物</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px;margin-bottom:28px;">
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-file-text"/></svg></span><h4 style="margin-top:8px;">AI利用ポリシー</h4><p style="font-size:13px;">利用範囲・禁止事項・罰則を明文化した社内規程</p></div>
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-message"/></svg></span><h4 style="margin-top:8px;">ガイドラインBOT</h4><p style="font-size:13px;">「これ入力していい？」に即答する社内AI相談窓口</p></div>
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-search"/></svg></span><h4 style="margin-top:8px;">社内ポータル</h4><p style="font-size:13px;">ルール参照・FAQ・申請フローをまとめたページ</p></div>
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-bar-chart"/></svg></span><h4 style="margin-top:8px;">ロードマップ</h4><p style="font-size:13px;">堀内硝子さま専用のAI活用展開計画</p></div>
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-zap"/></svg></span><h4 style="margin-top:8px;">研修プログラム</h4><p style="font-size:13px;">初期メンバー研修＋全社研修の実施</p></div>
+    <div class="card" style="text-align:center;padding:20px;"><span class="icon" style="color:var(--accent);"><svg><use href="#i-mail"/></svg></span><h4 style="margin-top:8px;">成果レポート</h4><p style="font-size:13px;">3ヶ月の活動報告と次フェーズへの提言</p></div>
+  </div>
+  <div class="roadmap">
+    <div class="phase" data-phase="1">
+      <div class="phase-header">Month 1 — ルール策定＋初期研修</div>
+      <h3>土台を作る</h3>
+      <p>AI利用ポリシー、セキュリティガイドライン、禁止事項と罰則規定を策定。同時に初期メンバー3名への実践研修を実施。</p>
+      <ul class="phase-items">
+        <li>AI利用ポリシーの策定（利用範囲・禁止事項・罰則）</li>
+        <li>セキュリティガイドラインの整備</li>
+        <li>初期メンバー実践研修（3名、1〜2時間）</li>
+        <li>導入ロードマップの策定</li>
+      </ul>
+    </div>
+    <div class="phase" data-phase="2">
+      <div class="phase-header">Month 2 — BOT構築＋運用開始</div>
+      <h3>仕組みを作る</h3>
+      <p>AI利用ガイドラインBOTを構築。「この情報は入れていいか」「このツールは使っていいか」に自動回答する社内相談窓口。</p>
+      <ul class="phase-items">
+        <li>AI利用ガイドラインBOTの設計・構築</li>
+        <li>社内ポータル（ルール参照ページ）の構築</li>
+        <li>初期メンバーでの運用開始・フィードバック収集</li>
+      </ul>
+    </div>
+    <div class="phase" data-phase="3">
+      <div class="phase-header">Month 3 — 全社研修＋展開準備</div>
+      <h3>全社に広げる</h3>
+      <p>全社員向け研修でルールと活用法を周知。5名の公募メンバー選定と本格展開の準備。</p>
+      <ul class="phase-items">
+        <li>全社研修の実施（ルール周知＋AI活用の基礎）</li>
+        <li>5名の公募メンバー選定</li>
+        <li>Phase 2（活用・定着フェーズ）への移行準備</li>
+        <li>3ヶ月の成果レポート提出</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PRICING -->
+<section class="fade-up">
+  <div class="section-label">Section 03</div>
+  <h2>お見積もり</h2>
+  <p class="section-lead">ガバナンス策定から導入支援まで、ワンパッケージでご提供いたします。</p>
+  <table class="price-table">
+    <thead><tr><th>項目</th><th class="price">金額（税抜）</th></tr></thead>
+    <tbody>
+      <tr style="background:var(--bg-warm,rgba(239,68,68,.04));">
+        <td class="item-main">初期メンバー実践研修（3名、1〜2時間）</td>
+        <td class="price"><span class="strike">¥75,000</span><span style="color:#DC2626;font-weight:700;font-size:14px;margin-left:8px;">今回無料</span></td>
+      </tr>
+      <tr style="background:var(--bg-warm,rgba(239,68,68,.04));">
+        <td class="item-main">ロードマップ策定</td>
+        <td class="price"><span class="strike">¥150,000</span><span style="color:#DC2626;font-weight:700;font-size:14px;margin-left:8px;">今回無料</span></td>
+      </tr>
+      <tr><td colspan="2" style="padding:8px 16px;font-size:13px;color:var(--text-secondary);border-bottom:2px solid var(--border);">上記2点は、下記パッケージにお含みしてご提供いたします。</td></tr>
+      <tr><td class="item-main">AIガバナンス策定パッケージ（3ヶ月）</td><td class="price">¥900,000</td></tr>
+      <tr><td class="item-sub">├ ガバナンスルール策定</td><td class="price" style="font-size:14px;">¥600,000（¥200,000×3ヶ月）</td></tr>
+      <tr><td class="item-sub">├ AI利用ガイドラインBOT構築</td><td class="price" style="font-size:14px;">¥200,000</td></tr>
+      <tr><td class="item-sub">├ 全社研修</td><td class="price" style="font-size:14px;">¥100,000</td></tr>
+      <tr><td class="item-main">ChatGPT Business 導入支援</td><td class="price">¥100,000</td></tr>
+      <tr><td class="item-sub">├ アカウント開設・初期設定代行</td><td></td></tr>
+      <tr><td class="item-sub">└ 使い方ミニセミナー</td><td></td></tr>
+      <tr><td class="item-main total">合計</td><td class="price total">¥1,000,000</td></tr>
+    </tbody>
+  </table>
+  <div class="insight" style="margin-top:20px;">
+    <p>上記は初期導入フェーズの費用です。ChatGPT Business / Plusの月額利用料（OpenAI社への支払い）は別途発生いたします。</p>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SCHEDULE -->
+<section class="fade-up">
+  <div class="section-label">Section 04</div>
+  <h2>プロジェクトスケジュール</h2>
+  <p class="section-lead">お盆明け（8/18）キックオフを想定した全体スケジュールです。</p>
+  <style>
+  .gc{width:100%;margin-top:24px;overflow-x:auto;}
+  .gc table{width:100%;border-collapse:collapse;min-width:800px;}
+  .gc th{font-size:11px;font-weight:600;color:var(--text-secondary);padding:6px 0;text-align:center;border-bottom:1px solid var(--border);letter-spacing:.5px;}
+  .gc th:first-child{text-align:left;padding-left:0;min-width:220px;font-size:13px;}
+  .gc td{padding:0;height:32px;vertical-align:middle;position:relative;border-left:1px solid var(--border);}
+  .gc td:first-child{font-size:13px;color:var(--text-primary);font-weight:500;padding:8px 0;border-left:none;}
+  .gc .sec-head{font-size:12px;font-weight:700;color:var(--text-primary);letter-spacing:.5px;padding:20px 0 8px;border-bottom:none;text-transform:uppercase;}
+  .gc .sec-head td{height:auto;padding:20px 0 8px;border-bottom:none;}
+  .gc .sec-price{font-size:12px;color:var(--text-secondary);font-weight:400;margin-left:8px;}
+  .gc .bar{position:absolute;top:4px;height:22px;border-radius:5px;}
+  .gc .w-full{left:2%;right:2%;}
+  .gc .w-left{left:2%;right:50%;}
+  .gc .w-right{left:50%;right:2%;}
+  .gc .lbl{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;display:inline-block;margin-top:2px;}
+  .gc .lbl-cyan{background:rgba(6,182,212,.12);color:#0891B2;}
+  .gc .lbl-blue{background:rgba(37,99,235,.12);color:#2563EB;}
+  .gc .lbl-purple{background:rgba(139,92,246,.12);color:#7C3AED;}
+  .gc .lbl-amber{background:rgba(245,158,11,.12);color:#D97706;}
+  .gc .lbl-green{background:rgba(16,185,129,.12);color:#059669;}
+  .gc .lbl-pink{background:rgba(236,72,153,.12);color:#DB2777;}
+  .gc .lbl-gray{background:rgba(107,114,128,.12);color:#6B7280;}
+  .gc .spacer td{height:16px;border:none;}
+  </style>
+  <div class="gc">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>1W<br><span style="font-weight:400;font-size:10px;">8/18</span></th>
+        <th>2W<br><span style="font-weight:400;font-size:10px;">8/25</span></th>
+        <th>3W<br><span style="font-weight:400;font-size:10px;">9/1</span></th>
+        <th>4W<br><span style="font-weight:400;font-size:10px;">9/8</span></th>
+        <th>5W<br><span style="font-weight:400;font-size:10px;">9/15</span></th>
+        <th>6W<br><span style="font-weight:400;font-size:10px;">9/22</span></th>
+        <th>7W<br><span style="font-weight:400;font-size:10px;">9/29</span></th>
+        <th>8W<br><span style="font-weight:400;font-size:10px;">10/6</span></th>
+        <th>9W<br><span style="font-weight:400;font-size:10px;">10/13</span></th>
+        <th>10W<br><span style="font-weight:400;font-size:10px;">10/20</span></th>
+        <th>11W<br><span style="font-weight:400;font-size:10px;">10/27</span></th>
+        <th>12W<br><span style="font-weight:400;font-size:10px;">11/3</span></th>
+        <th>13W<br><span style="font-weight:400;font-size:10px;">11/10</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- SECTION: 導入支援 -->
+      <tr class="sec-head"><td colspan="14">ChatGPT Business 導入支援<span class="sec-price">¥100,000</span></td></tr>
+      <tr>
+        <td>アカウント開設・初期設定 <span class="lbl lbl-cyan">設定代行</span></td>
+        <td><div class="bar w-full" style="background:#06B6D4;opacity:.7;"></div></td>
+        <td><div class="bar w-left" style="background:#06B6D4;opacity:.7;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>使い方ミニセミナー <span class="lbl lbl-cyan">セミナー</span></td>
+        <td></td>
+        <td><div class="bar w-right" style="background:#06B6D4;opacity:.7;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+
+      <!-- SPACER -->
+      <tr class="spacer"><td colspan="14"></td></tr>
+
+      <!-- SECTION: ガバナンス -->
+      <tr class="sec-head"><td colspan="14">AIガバナンス策定パッケージ<span class="sec-price">¥900,000</span></td></tr>
+      <tr>
+        <td>ガバナンスルール策定 <span class="lbl lbl-blue">ルール</span></td>
+        <td><div class="bar w-full" style="background:#2563EB;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#2563EB;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#2563EB;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#2563EB;opacity:.6;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>初期メンバー実践研修 <span class="lbl lbl-purple">研修</span></td>
+        <td></td><td></td>
+        <td><div class="bar w-right" style="background:#8B5CF6;opacity:.7;"></div></td>
+        <td><div class="bar w-left" style="background:#8B5CF6;opacity:.7;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>ロードマップ策定 <span class="lbl lbl-blue">計画</span></td>
+        <td></td><td></td><td></td>
+        <td><div class="bar w-full" style="background:#2563EB;opacity:.6;"></div></td>
+        <td><div class="bar w-left" style="background:#2563EB;opacity:.6;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>ガイドラインBOT構築 <span class="lbl lbl-amber">BOT</span></td>
+        <td></td><td></td><td></td><td></td>
+        <td><div class="bar w-full" style="background:#F59E0B;opacity:.7;"></div></td>
+        <td><div class="bar w-full" style="background:#F59E0B;opacity:.7;"></div></td>
+        <td><div class="bar w-full" style="background:#F59E0B;opacity:.7;"></div></td>
+        <td><div class="bar w-left" style="background:#F59E0B;opacity:.7;"></div></td>
+        <td></td><td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>社内ポータル構築 <span class="lbl lbl-amber">ポータル</span></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="bar w-right" style="background:#F59E0B;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#F59E0B;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#F59E0B;opacity:.6;"></div></td>
+        <td></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td>全社研修 <span class="lbl lbl-green">全社</span></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="bar w-right" style="background:#10B981;opacity:.7;"></div></td>
+        <td><div class="bar w-left" style="background:#10B981;opacity:.7;"></div></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td>5名公募・選定 <span class="lbl lbl-green">公募</span></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="bar w-full" style="background:#10B981;opacity:.6;"></div></td>
+        <td><div class="bar w-full" style="background:#10B981;opacity:.6;"></div></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>成果レポート提出 <span class="lbl lbl-pink">報告</span></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="bar w-full" style="background:#EC4899;opacity:.7;"></div></td>
+      </tr>
+
+      <!-- SPACER -->
+      <tr class="spacer"><td colspan="14"></td></tr>
+
+      <!-- SECTION: Phase 2 -->
+      <tr class="sec-head"><td colspan="14">Phase 2 以降<span class="sec-price">別途ご提案</span></td></tr>
+      <tr>
+        <td>活用・定着支援 <span class="lbl lbl-gray">→ 継続</span></td>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+        <td><div class="bar" style="background:#9CA3AF;opacity:.3;left:2%;right:-200%;border-radius:5px 0 0 5px;"></div></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SECURITY DETAILS -->
+<section class="fade-up">
+  <div class="section-label">Section 04</div>
+  <h2>セキュリティ対策の詳細</h2>
+  <p class="section-lead">お打ち合わせで特に重要視されていたセキュリティ面について、具体的な対策をまとめます。</p>
+  <div class="feature-grid">
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-shield"/></svg></span></div><div class="feature-body"><h4>メモリ機能の制御</h4><p>Businessワークスペースではメモリ機能をOFFに設定することを推奨。意図しない情報の蓄積と共有を防止します。機密の壁打ちは個人Plusで。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-file-text"/></svg></span></div><div class="feature-body"><h4>ガバナンスルールによる歯止め</h4><p>禁止事項と罰則規定を明文化。「万が一の場合にはアカウントを確認させてもらう」という抑止力を組み込みます。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-zap"/></svg></span></div><div class="feature-body"><h4>ガイドラインBOTによる自動判定</h4><p>「この情報は入力していいか」「このツールは使っていいか」をBOTが即時回答。判断に迷う場面での安全弁。</p></div></div>
+    <div class="feature-card"><div class="feature-icon-wrap"><span class="icon"><svg><use href="#i-bar-chart"/></svg></span></div><div class="feature-body"><h4>出力物の取り扱い教育</h4><p>AIの出力を外部資料にそのまま転載するリスク（誤情報・著作権・情報漏洩）を研修で徹底周知します。</p></div></div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- FUTURE -->
+<section class="fade-up">
+  <div class="section-label">Future Phase</div>
+  <h2>今後の展開</h2>
+  <p class="section-lead">本プロジェクト完了後、以下の展開が視野に入ります。</p>
+  <style>
+.acc{border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+.acc-head{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s;}
+.acc-head:hover{background:var(--surface-raised,rgba(0,0,0,.02));}
+.acc-head h3{margin:0;font-size:16px;}
+.acc-head .arr{transition:transform .3s;font-size:18px;color:var(--text-secondary);}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease;padding:0 24px;}
+.acc.open .acc-body{max-height:600px;padding:0 24px 24px;}
+.acc.open .arr{transform:rotate(180deg);}
+.acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;}
+.acc-item{padding:12px 16px;background:var(--surface-raised,rgba(0,0,0,.02));border-radius:8px;}
+.acc-item h4{font-size:14px;margin-bottom:4px;}
+.acc-item p{font-size:13px;}
+</style>
+  <div class="acc" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="tag tag-new" style="margin-bottom:4px;">Phase 2</div><h3>活用・定着支援</h3></div><span class="arr">▼</span></div>
+    <div class="acc-body">
+      <p style="font-size:14px;color:var(--text-secondary);">初期メンバーの成功体験を全社に広げ、AI活用を組織文化として定着させるフェーズです。</p>
+      <div class="acc-grid">
+        <div class="acc-item"><h4>カスタムGPT・社内アプリ開発支援</h4><p>製品選定ナビ、品質チェック、社内FAQなど業務特化型AI・Webアプリを構築</p></div>
+        <div class="acc-item"><h4>業務棚卸しワークショップ</h4><p>各メンバーの業務を分解し、AI化可能なタスクを特定・実行</p></div>
+        <div class="acc-item"><h4>セキュリティ面のフォローアップ</h4><p>ガバナンスルールの運用状況を確認し、新たなリスクや課題に対応</p></div>
+        <div class="acc-item"><h4>全社展開の判断支援</h4><p>5名→全社への拡大判断に必要なデータと提言をまとめて報告</p></div>
+      </div>
+      <p style="font-size:14px;margin-top:16px;"><strong><span class="icon" style="color:var(--accent);vertical-align:middle;margin-right:4px;display:inline;"><svg style="width:16px;height:16px;vertical-align:middle;"><use href="#i-target"/></svg></span>期待効果：</strong>AI活用が「一部の人の趣味」から「組織の標準」へ。メール作成、Excel分析、議事録作成で年間数百時間の削減。</p>
+    </div>
+  </div>
+  <div class="acc" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="tag tag-setup" style="margin-bottom:4px;">Phase 3</div><h3>データガバナンス</h3></div><span class="arr">▼</span></div>
+    <div class="acc-body">
+      <p style="font-size:14px;color:var(--text-secondary);">ファイルフォースの「ジャングル状態」を整理し、AIが正しく参照できるデータ基盤を構築します。</p>
+      <div class="acc-grid">
+        <div class="acc-item"><h4>現状診断・棚卸し</h4><p>既存ファイルの全量把握、重複・旧版の特定、フォルダ構造の分析</p></div>
+        <div class="acc-item"><h4>命名規則・分類ルールの策定</h4><p>新規ファイルの命名・配置ルールを策定。新旧管理の仕組みを整備</p></div>
+        <div class="acc-item"><h4>AIによる自動整理</h4><p>APIを活用したファイル自動分類・インデックス化の仕組みを構築</p></div>
+        <div class="acc-item"><h4>BI・分析基盤との接続</h4><p>整理されたデータをSalesforce等のBIツールと連携できる状態に</p></div>
+      </div>
+      <p style="font-size:14px;margin-top:16px;"><strong><span class="icon" style="color:var(--accent);vertical-align:middle;margin-right:4px;display:inline;"><svg style="width:16px;height:16px;vertical-align:middle;"><use href="#i-target"/></svg></span>期待効果：</strong>「あのファイルどこ？」が消える。Salesforceに正しいデータが流れ、AIが正確な分析を返せるようになる。</p>
+    </div>
+  </div>
+  <div class="acc" onclick="this.classList.toggle('open')">
+    <div class="acc-head"><div><div class="tag tag-ready" style="margin-bottom:4px;">Phase 4</div><h3>企業人格 Corpora</h3></div><span class="arr">▼</span></div>
+    <div class="acc-body">
+      <p style="font-size:14px;color:var(--text-secondary);">ベテラン技術者の判断基準・経験則・暗黙知をAIに移植し、永続的に引き出せる状態にします。</p>
+      <div class="acc-grid">
+        <div class="acc-item"><h4>キーパーソンへのインタビュー</h4><p>1人90分×5〜10回（プランによる）の深掘りインタビューで、判断の分岐点と根拠を引き出す</p></div>
+        <div class="acc-item"><h4>知識の構造化</h4><p>AIが思考回路を抽出・整理し、検索可能な知識ベースを構築</p></div>
+        <div class="acc-item"><h4>社内AI & カスタムGPTへの搭載</h4><p>「この条件ではベテランはどう判断してた？」にAIが答えられる状態に</p></div>
+        <div class="acc-item"><h4>経営判断の壁打ち</h4><p>社長の思考パターンをAIに移植し、経営判断のシミュレーションにも活用</p></div>
+      </div>
+      <p style="font-size:14px;margin-top:16px;"><strong><span class="icon" style="color:var(--accent);vertical-align:middle;margin-right:4px;display:inline;"><svg style="width:16px;height:16px;vertical-align:middle;"><use href="#i-target"/></svg></span>期待効果：</strong>「木村さんが定年になったら困る」がなくなる。ベテランの知恵が組織の資産として永続する。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+</div>
+
+<footer>
+  <div class="company">株式会社TOKON 事業開発室 AI/デジタルソリューションG</div>
+  <p>喜多村 一寛（きたむら かずひろ）<br>kitamura@tokon.co.jp</p>
+  <p style="margin-top:16px;font-size:11px;opacity:.5;">Copyright © TOKON All Rights Reserved.</p>
+</footer>
+
+<script>
+
+// Theme toggle
+function toggleTheme() {
+  const h = document.documentElement, d = h.getAttribute('data-theme') === 'dark';
+  h.setAttribute('data-theme', d ? '' : 'dark');
+  document.querySelector('#themeBtn .icon svg use').setAttribute('href', d ? '#i-moon' : '#i-sun');
+  localStorage.setItem('theme', d ? 'light' : 'dark');
+}
+// Font size toggle
+function toggleFontSize() {
+  const h = document.documentElement, l = h.getAttribute('data-fs') === 'large';
+  h.setAttribute('data-fs', l ? '' : 'large');
+  localStorage.setItem('fs', l ? '' : 'large');
+}
+// Restore preferences
+(function() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.querySelector('#themeBtn .icon svg use').setAttribute('href', '#i-sun');
+  }
+  if (localStorage.getItem('fs') === 'large') document.documentElement.setAttribute('data-fs', 'large');
+})();
+
+// Intersection Observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Count-up animation
+const countObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const el = entry.target, target = parseInt(el.dataset.count);
+    if (!target) return;
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 30));
+    const interval = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(interval); }
+      el.textContent = current;
+    }, 30);
+    countObserver.unobserve(el);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => countObserver.observe(el));
+
+</script>
+</body>
+</html>
